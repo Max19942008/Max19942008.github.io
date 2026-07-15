@@ -114,6 +114,11 @@ section{padding:70px 0;border-top:1px solid var(--line)}
 .cinfo a{display:inline-flex;align-items:center;gap:9px;background:var(--card);border:1px solid var(--line);padding:12px 20px;border-radius:10px;font-size:.9rem;transition:.2s}
 .cinfo a:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
 footer{padding:34px 0;text-align:center;color:var(--dim);font-size:.83rem;border-top:1px solid var(--line)}
+.navright{display:flex;align-items:center;gap:20px}
+.langsw{display:inline-flex;gap:4px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px}
+.langsw a{font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:600;letter-spacing:.04em;color:var(--muted);padding:5px 10px;border-radius:999px;transition:.2s}
+.langsw a:hover{color:var(--accent)}
+.langsw a.on{background:var(--accent);color:#1a1204}
 </style>
 </head>
 <body>
@@ -121,12 +126,15 @@ footer{padding:34px 0;text-align:center;color:var(--dim);font-size:.83rem;border
 <nav>
   <div class="wrap">
     <div class="brand">GI<span>.</span></div>
+    <div class="navright">
     <div class="navlinks">
       <a href="#about">О себе</a>
       <a href="#skills">Навыки</a>
       <a href="#experience">Опыт</a>
       <a href="#education">Образование</a>
       <a href="#contact">Контакты</a>
+    </div>
+    <div class="langsw"><a href="/GulkhayoCV/">EN</a><a href="/GulkhayoCV/ko/">KO</a><a href="/GulkhayoCV/ru/" class="on">RU</a></div>
     </div>
   </div>
 </nav>
