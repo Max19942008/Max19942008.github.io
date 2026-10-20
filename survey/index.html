@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>한국어 문법 설문 / Grammatika so'rovnomasi</title>
+<style>
+  :root{ --bg:#f4f5fb; --card:#ffffff; --ink:#1a1c2b; --muted:#6b7090; --line:#e3e5f0; --brand:#4b50c4; --brand2:#eef0fb; }
+  *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body{ margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",sans-serif;
+        background:var(--bg); color:var(--ink); line-height:1.5; }
+  .wrap{ max-width:640px; margin:0 auto; padding:16px; }
+  header{ background:linear-gradient(135deg,#4b50c4,#6a70e0); color:#fff; border-radius:18px; padding:22px 20px; margin:8px 0 18px; }
+  header h1{ font-size:19px; margin:0 0 6px; line-height:1.35; }
+  header p{ font-size:13px; margin:0; opacity:.92; }
+  .card{ background:var(--card); border:1px solid var(--line); border-radius:16px; padding:16px 16px 6px; margin-bottom:14px; }
+  .sec{ font-size:15px; font-weight:700; color:var(--brand); margin:2px 0 4px; }
+  .sec small{ display:block; font-weight:500; color:var(--muted); font-size:12px; margin-top:2px; }
+  .q{ margin:14px 0; }
+  .q > label.qt{ display:block; font-weight:600; font-size:14px; margin-bottom:8px; }
+  .q small.uz{ color:var(--muted); font-weight:400; }
+  .opts label{ display:flex; align-items:center; gap:8px; padding:9px 11px; border:1px solid var(--line);
+               border-radius:10px; margin-bottom:7px; font-size:14px; cursor:pointer; }
+  .opts input{ accent-color:var(--brand); width:17px; height:17px; }
+  .scalehead{ display:flex; justify-content:space-between; font-size:11px; color:var(--muted); margin:0 2px 8px; }
+  .grid .row{ display:flex; align-items:center; justify-content:space-between; gap:6px;
+              padding:8px 2px; border-bottom:1px solid var(--line); }
+  .grid .row:last-child{ border-bottom:none; }
+  .grid .gl{ font-size:14px; font-weight:600; flex:1 1 auto; }
+  .grid .scale{ display:flex; gap:4px; flex:0 0 auto; }
+  .grid .scale label{ width:30px; height:34px; display:flex; align-items:center; justify-content:center;
+                      border:1px solid var(--line); border-radius:8px; font-size:13px; cursor:pointer; position:relative; }
+  .grid .scale input{ position:absolute; opacity:0; inset:0; margin:0; cursor:pointer; }
+  .grid .scale input:checked + span{ position:absolute; inset:0; background:var(--brand); color:#fff;
+                      border-radius:7px; display:flex; align-items:center; justify-content:center; }
+  textarea{ width:100%; border:1px solid var(--line); border-radius:10px; padding:10px; font:inherit; min-height:70px; resize:vertical; }
+  button{ width:100%; background:var(--brand); color:#fff; border:none; border-radius:12px;
+          padding:15px; font-size:16px; font-weight:700; cursor:pointer; margin:6px 0 30px; }
+  button:disabled{ opacity:.6; }
+  .ok{ display:none; text-align:center; padding:40px 16px; }
+  .ok h2{ color:var(--brand); }
+  .req{ color:#d23; }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){ --bg:#15171f; --card:#1e2130; --ink:#eef0fb; --muted:#9aa0c0; --line:#31344a; --brand2:#262a46; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <form id="f">
+    <header>
+      <h1>우즈베크어권 한국어 학습자 문법 설문</h1>
+      <p>O'zbek tilli koreys tili o'rganuvchilari uchun grammatika so'rovnomasi · 익명 / anonim · ~5 min</p>
+    </header>
+
+    <!-- hidden -->
+    <input type="hidden" name="access_key" value="f147079d-cbdd-49a2-9c46-fe82b9500504">
+    <input type="hidden" name="subject" value="새 설문 응답 - 우즈베크어권 학습자 문법">
+    <input type="checkbox" name="botcheck" style="display:none">
+
+    <div class="card">
+      <div class="sec">Ⅰ. 기본 정보 <small>Shaxsiy ma'lumotlar</small></div>
+      <div class="q"><label class="qt">성별 <small class="uz">/ Jins</small></label>
+        <div class="opts">
+          <label><input type="radio" name="성별" value="남/Erkak">남 / Erkak</label>
+          <label><input type="radio" name="성별" value="여/Ayol">여 / Ayol</label>
+        </div></div>
+      <div class="q"><label class="qt">한국어 학습 기간 <small class="uz">/ O'rganish muddati</small> <span class="req">*</span></label>
+        <div class="opts">
+          <label><input type="radio" name="학습기간" value="1년미만" required>1년 미만 / 1 yildan kam</label>
+          <label><input type="radio" name="학습기간" value="1-2년">1~2년 / 1~2 yil</label>
+          <label><input type="radio" name="학습기간" value="3-4년">3~4년 / 3~4 yil</label>
+          <label><input type="radio" name="학습기간" value="5년이상">5년 이상 / 5 yildan ortiq</label>
+        </div></div>
+      <div class="q"><label class="qt">현재 TOPIK 등급 <small class="uz">/ TOPIK darajasi</small> <span class="req">*</span></label>
+        <div class="opts">
+          <label><input type="radio" name="TOPIK등급" value="없음" required>없음 / Yo'q</label>
+          <label><input type="radio" name="TOPIK등급" value="1-2급">1~2급</label>
+          <label><input type="radio" name="TOPIK등급" value="3-4급">3~4급</label>
+          <label><input type="radio" name="TOPIK등급" value="5-6급">5~6급</label>
+        </div></div>
+      <div class="q"><label class="qt">학습 목적 <small class="uz">/ Maqsad</small></label>
+        <div class="opts">
+          <label><input type="radio" name="학습목적" value="유학">유학 / Ta'lim</label>
+          <label><input type="radio" name="학습목적" value="취업EPS">취업(EPS) / Ish (EPS)</label>
+          <label><input type="radio" name="학습목적" value="결혼이주">결혼·이주 / Nikoh</label>
+          <label><input type="radio" name="학습목적" value="기타">기타 / Boshqa</label>
+        </div></div>
+    </div>
+
+    <div class="card" id="scalecard">
+      <div class="sec">Ⅱ. 문법 항목별 어려움 <small>Har bir grammatika qanchalik qiyin? (1=쉬움/oson, 5=어려움/qiyin)</small></div>
+      <div class="scalehead"><span>쉬움 / oson</span><span>어려움 / qiyin</span></div>
+      <!-- GRID GROUPS injected by script -->
+    </div>
+
+    <div class="card">
+      <div class="sec">Ⅲ. 혼동하는 형태 <small>Farqlash qiyin bo'lgan juftliklarni belgilang</small></div>
+      <div class="q"><div class="opts" id="pairs"></div></div>
+    </div>
+
+    <div class="card">
+      <div class="sec">Ⅳ. 자유 응답 <small>Erkin javob</small></div>
+      <div class="q"><label class="qt">가장 어려운 문법과 그 이유 <small class="uz">/ Eng qiyin grammatika va sababi</small></label>
+        <textarea name="가장어려운문법"></textarea></div>
+      <div class="q"><label class="qt">우즈베크어와 비교 설명이 도움이 됩니까? <small class="uz">/ O'zbekcha taqqoslab tushuntirilsa foydalimi?</small></label>
+        <div class="opts">
+          <label><input type="radio" name="모어비교효용" value="매우그렇다">매우 그렇다 / Albatta</label>
+          <label><input type="radio" name="모어비교효용" value="그렇다">그렇다 / Ha</label>
+          <label><input type="radio" name="모어비교효용" value="보통">보통 / O'rtacha</label>
+          <label><input type="radio" name="모어비교효용" value="아니다">아니다 / Yo'q</label>
+        </div></div>
+      <div class="q"><label class="qt">바라는 점 <small class="uz">/ Istaklaringiz</small></label>
+        <textarea name="바라는점"></textarea></div>
+    </div>
+
+    <button type="submit" id="sub">제출하기 / Yuborish</button>
+  </form>
+
+  <div class="ok" id="ok">
+    <h2>감사합니다! Rahmat!</h2>
+    <p>응답이 제출되었습니다.<br>Javobingiz qabul qilindi.</p>
+  </div>
+</div>
+
+<script>
+const CATS = [
+  ["① 이유·원인 / Sabab", ["-아서/어서","-(으)니까","-기 때문에","-느라고","-는 바람에"]],
+  ["② 조건·가정 / Shart", ["-(으)면","-(으)려면","-아/어야","-더라도"]],
+  ["③ 추측·양태 / Taxmin", ["-(으)ㄹ 것 같다","-겠-","-나 보다","-(으)ㄹ지(도) 모르다","-(으)ㄹ 리가 없다"]],
+  ["④ 상태·배경 / Holat", ["-고 있다","-아/어 있다","-(으)ㄴ 채(로)","-는 대로"]],
+  ["⑤ 정도·비교 / Daraja", ["-보다","-처럼/-같이","-만큼","-(으)ㄹ수록"]],
+  ["⑥ 시간·순서 / Vaqt", ["-기 전에","-(으)ㄴ 후에","-(으)면서","-자마자","-았/었더니"]],
+  ["⑦ 나열·대조 / Sanash", ["-고","-지만","-(으)ㄴ/는데","-(으)ㄴ/는 데다(가)","-(으)ㄴ/는커녕"]]
+];
+const PAIRS = ["-아서/어서 ↔ -(으)니까","-고 있다 ↔ -아/어 있다","-(으)ㄹ 것 같다 ↔ -나 보다",
+  "-느라고 ↔ -는 바람에","-(으)면 ↔ -(으)려면","-(으)ㄴ/는데 ↔ -지만"];
+const card = document.getElementById('scalecard');
+CATS.forEach(([title,items])=>{
+  const h=document.createElement('div'); h.className='sec'; h.style.fontSize='13px'; h.style.marginTop='14px'; h.textContent=title; card.appendChild(h);
+  const g=document.createElement('div'); g.className='grid';
+  items.forEach(it=>{
+    const row=document.createElement('div'); row.className='row';
+    const gl=document.createElement('div'); gl.className='gl'; gl.textContent=it; row.appendChild(gl);
+    const sc=document.createElement('div'); sc.className='scale';
+    for(let n=1;n<=5;n++){ const l=document.createElement('label');
+      l.innerHTML='<input type="radio" name="난이도_'+it+'" value="'+n+'"><span>'+n+'</span>'; sc.appendChild(l); }
+    row.appendChild(sc); g.appendChild(row);
+  });
+  card.appendChild(g);
+});
+const pc=document.getElementById('pairs');
+PAIRS.forEach(p=>{ const l=document.createElement('label');
+  l.innerHTML='<input type="checkbox" name="혼동쌍" value="'+p+'">'+p; pc.appendChild(l); });
+
+document.getElementById('f').addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const btn=document.getElementById('sub'); btn.disabled=true; btn.textContent='전송 중… / Yuborilmoqda…';
+  const data=Object.fromEntries(new FormData(e.target).entries());
+  const fd=new FormData(e.target);
+  const pairs=fd.getAll('혼동쌍'); data['혼동쌍']=pairs.join(', ');
+  try{
+    const r=await fetch('https://api.web3forms.com/submit',{method:'POST',
+      headers:{'Content-Type':'application/json',Accept:'application/json'}, body:JSON.stringify(data)});
+    const j=await r.json();
+    if(j.success){ document.getElementById('f').style.display='none'; document.getElementById('ok').style.display='block'; window.scrollTo(0,0); }
+    else{ btn.disabled=false; btn.textContent='다시 제출 / Qayta yuborish'; alert('오류 / Xato: '+(j.message||'')); }
+  }catch(err){ btn.disabled=false; btn.textContent='다시 제출 / Qayta yuborish'; alert('네트워크 오류 / Tarmoq xatosi'); }
+});
+</script>
+</body>
+</html>
