@@ -101,7 +101,9 @@
 
     <div class="card">
       <div class="sec">Ⅳ. 자유 응답 <small>Erkin javob</small></div>
-      <div class="q"><label class="qt">가장 어려운 문법과 그 이유 <small class="uz">/ Eng qiyin grammatika va sababi</small></label>
+      <div class="q"><label class="qt">문법이 어려운 이유는? <small class="uz">/ Grammatika nega qiyin? (해당하는 것 모두 / barchasini belgilang)</small></label>
+        <div class="opts" id="why"></div></div>
+      <div class="q"><label class="qt">가장 어려운 문법 하나와 그 이유 <small class="uz">/ Eng qiyin bitta grammatika va sababi</small></label>
         <textarea name="가장어려운문법"></textarea></div>
       <div class="q"><label class="qt">우즈베크어와 비교 설명이 도움이 됩니까? <small class="uz">/ O'zbekcha taqqoslab tushuntirilsa foydalimi?</small></label>
         <div class="opts">
@@ -135,6 +137,13 @@ const CATS = [
 ];
 const PAIRS = ["-아서/어서 ↔ -(으)니까","-고 있다 ↔ -아/어 있다","-(으)ㄹ 것 같다 ↔ -나 보다",
   "-느라고 ↔ -는 바람에","-(으)면 ↔ -(으)려면","-(으)ㄴ/는데 ↔ -지만"];
+const WHY = [
+  "비슷한 문법이 많아서 무엇을 써야 할지 혼동된다 / O'xshash grammatika ko'p, qaysi birini ishlatishni bilmayman",
+  "우즈베크어에 없는 형태라서 이해하기 어렵다 / O'zbek tilida yo'q shakl, tushunish qiyin",
+  "형태(활용)가 복잡해서 / Shakli (tuslanishi) murakkab",
+  "언제, 어떤 상황에서 쓰는지 몰라서 / Qachon, qaysi vaziyatda ishlatishni bilmayman",
+  "의미 차이가 미세해서 / Ma'no farqi juda nozik"
+];
 const card = document.getElementById('scalecard');
 CATS.forEach(([title,items])=>{
   const h=document.createElement('div'); h.className='sec'; h.style.fontSize='13px'; h.style.marginTop='14px'; h.textContent=title; card.appendChild(h);
@@ -152,13 +161,17 @@ CATS.forEach(([title,items])=>{
 const pc=document.getElementById('pairs');
 PAIRS.forEach(p=>{ const l=document.createElement('label');
   l.innerHTML='<input type="checkbox" name="혼동쌍" value="'+p+'">'+p; pc.appendChild(l); });
+const wc=document.getElementById('why');
+WHY.forEach(w=>{ const l=document.createElement('label');
+  l.innerHTML='<input type="checkbox" name="어려운이유" value="'+w+'">'+w; wc.appendChild(l); });
 
 document.getElementById('f').addEventListener('submit', async (e)=>{
   e.preventDefault();
   const btn=document.getElementById('sub'); btn.disabled=true; btn.textContent='전송 중… / Yuborilmoqda…';
   const data=Object.fromEntries(new FormData(e.target).entries());
   const fd=new FormData(e.target);
-  const pairs=fd.getAll('혼동쌍'); data['혼동쌍']=pairs.join(', ');
+  data['혼동쌍']=fd.getAll('혼동쌍').join(', ');
+  data['어려운이유']=fd.getAll('어려운이유').join(', ');
   try{
     const r=await fetch('https://api.web3forms.com/submit',{method:'POST',
       headers:{'Content-Type':'application/json',Accept:'application/json'}, body:JSON.stringify(data)});
