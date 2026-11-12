@@ -250,6 +250,13 @@ h1 em{display:block;font-style:normal;color:var(--dim);font-weight:600;font-size
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
+<style>
+#mtoast{position:fixed;left:50%;bottom:24px;z-index:200;display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;max-width:calc(100% - 32px);padding:14px 18px;border-radius:14px;background:#11141b;color:#eef1f6;font:500 14px/1.4 'Inter','Noto Sans KR',system-ui,sans-serif;box-shadow:0 18px 40px -12px rgba(0,0,0,.45);transform:translate(-50%,140%);opacity:0;transition:transform .25s,opacity .25s;pointer-events:none}
+#mtoast.show{transform:translate(-50%,0);opacity:1;pointer-events:auto}
+#mtoast span{opacity:.75;word-break:break-all}
+#mtoast a{color:#34d1b6;font-weight:600;text-decoration:none;white-space:nowrap}
+@media print{#mtoast{display:none!important}}
+</style>
 </head>
 <body>
 
@@ -831,6 +838,21 @@ h1 em{display:block;font-style:normal;color:var(--dim);font-weight:600;font-size
   document.querySelectorAll('.yr').forEach(function(s){s.textContent=new Date().getFullYear();});
   var h=location.hash.slice(1), q=new URLSearchParams(location.search).get('lang'), saved=store('lang'), nav=(navigator.language||'').slice(0,2);
   show(langs.indexOf(h)>=0?h:(langs.indexOf(q)>=0?q:(langs.indexOf(saved)>=0?saved:(langs.indexOf(nav)>=0?nav:'en'))),false);
+})();
+</script>
+<script>
+(function(){
+  var TT={en:['Email copied','Open in Gmail'],ko:['이메일 주소가 복사되었습니다','Gmail로 열기'],ru:['Адрес скопирован','Открыть в Gmail'],uz:["Email nusxalandi","Gmail'da ochish"]};
+  function copy(m){try{if(navigator.clipboard){navigator.clipboard.writeText(m);return;}}catch(e){}
+    var t=document.createElement('textarea');t.value=m;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();try{document.execCommand('copy');}catch(e){}t.remove();}
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[href^="mailto:"]'); if(!a) return;
+    var m=decodeURIComponent(a.getAttribute('href').slice(7).split('?')[0]); copy(m);
+    var l=(document.documentElement.lang||'en').slice(0,2), t=TT[l]||TT.en, el=document.getElementById('mtoast');
+    if(!el){el=document.createElement('div');el.id='mtoast';el.setAttribute('role','status');document.body.appendChild(el);}
+    el.innerHTML='<b>'+t[0]+'</b><span>'+m+'</span><a target="_blank" rel="noopener" href="https://mail.google.com/mail/?view=cm&fs=1&to='+encodeURIComponent(m)+'">'+t[1]+' ↗</a>';
+    el.className='show'; clearTimeout(el._t); el._t=setTimeout(function(){el.className='';},8000);
+  });
 })();
 </script>
 </body>
