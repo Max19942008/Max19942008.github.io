@@ -176,8 +176,8 @@ h1 em{display:block;font-style:normal;color:var(--dim);font-weight:600;font-size
 .foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding:28px 24px 40px;color:var(--dim);font-size:.82rem}
 
 /* responsive */
-@media (max-width:980px){.links{display:none}.top-r{margin-left:auto}.skills-grid{grid-template-columns:1fr}.langs{position:static}}
-@media (max-width:860px){
+@media screen and (max-width:980px){.links{display:none}.top-r{margin-left:auto}.skills-grid{grid-template-columns:1fr}.langs{position:static}}
+@media screen and (max-width:860px){
   section{padding:72px 0}.hero{padding-top:40px}
   .hero-grid{grid-template-columns:1fr;gap:32px}
   .portrait{order:-1;width:180px;border-radius:22px}
@@ -188,8 +188,64 @@ h1 em{display:block;font-style:normal;color:var(--dim);font-weight:600;font-size
   .projs,.edus,.skills{grid-template-columns:1fr}
   .sec-head{grid-template-columns:1fr}.sec-head p{grid-column:1}.kicker{padding:0 0 10px}
 }
-@media (max-width:420px){.wrap{padding:0 16px}.langsw a{padding:7px 8px}.btn{padding:0 16px}.contact{padding:56px 20px}}
-@media print{.top,.theme,.cta,.c-links{display:none!important}section{padding:28px 0}.contact{background:none;color:#000}.proj,.skill,.edu,.langs{break-inside:avoid}}
+@media screen and (max-width:420px){.wrap{padding:0 16px}.langsw a{padding:7px 8px}.btn{padding:0 16px}.contact{padding:56px 20px}}
+.po{display:none!important}
+.btn.pdf{cursor:pointer;font-family:inherit}
+@page{size:A4;margin:11mm 12mm}
+@media print{
+  :root,:root[data-theme]{--bg:#fff;--bg-alt:#fff;--surface:#fff;--ink:#11141b;--ink-2:#2b303b;--muted:#4f5664;--dim:#7d838f;--line:#dcdad2;--accent:#0d7a6c;--accent-soft:rgba(13,122,108,.08);--accent-2:#3555c8;--shadow:none;--portrait:linear-gradient(160deg,#d6ebe4,#e6ebf5)}
+  html{font-size:10.5px}
+  body{font-size:9.6pt;line-height:1.45;background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .top,.cta,.status,#contact-en,#contact-ko,#contact-ru,#contact-uz,footer,.proj-links,.live-dot,.sec-head p,.kicker{display:none!important}
+  .po{display:inline-flex!important}
+  .wrap{max-width:none;padding:0}
+  section,section.alt{padding:0;margin-top:14px;background:none}
+  .hero{padding:0}
+  .hero-grid{grid-template-columns:1fr 104px;gap:22px;align-items:start}
+  .portrait{width:104px;border-radius:12px;box-shadow:none}
+  .portrait-bg::after{display:none}
+  h1{font-size:25pt;margin:0 0 2px}
+  h1 em{display:inline;font-size:.5em;margin-left:6px}
+  .role{font-size:11.5pt}
+  .lead{font-size:9.6pt;margin:6px 0 8px;max-width:none;color:var(--ink-2)}
+  .meta{margin-top:0;gap:3px 16px;font-size:8.6pt}
+  .meta svg{width:12px;height:12px}
+  .stats{margin-top:12px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .stat{padding:7px 10px 8px 0}.stat+.stat{padding-left:12px}
+  .stat b{font-size:14pt}.stat span{margin-top:2px;font-size:7.8pt}
+  .sec-head{display:block;margin-bottom:6px;border-bottom:2px solid var(--ink);padding-bottom:3px}
+  .sec-head h2{font-size:12.5pt;text-transform:uppercase;letter-spacing:.04em}
+  .jobs{border:0}
+  .job{grid-template-columns:118px 1fr;gap:12px;padding:7px 0;border-bottom:1px solid var(--line);break-inside:avoid}
+  .job:last-child{border-bottom:0}
+  .date{font-size:7.4pt;padding:2px 5px;border-radius:4px}
+  .job h3{font-size:10.8pt}
+  .job-co{margin:0 0 4px;font-size:8.8pt}
+  .job ul{gap:2px;margin-bottom:5px}
+  .job li{font-size:9pt;padding-left:12px}
+  .job li::before{left:0;top:.62em;width:5px}
+  .tags{gap:3px}.tags span{font-size:6.8pt;padding:2px 5px;border-radius:4px}
+  .projs{grid-template-columns:repeat(2,1fr);gap:7px}
+  .proj{padding:8px 10px;border-radius:8px;break-inside:avoid}
+  .proj:hover{transform:none}
+  .proj-top{display:none}
+  .proj h3{font-size:10.4pt;margin-bottom:2px}
+  .proj p{font-size:8.6pt;margin-bottom:5px}
+  .proj .tags{margin-bottom:0}
+  .skills-grid{grid-template-columns:1fr 170px;gap:8px}
+  .skills{grid-template-columns:repeat(3,1fr);gap:6px}
+  .skill,.langs{padding:7px 9px;border-radius:8px;break-inside:avoid}
+  .skill h4,.langs h4{font-size:9pt;margin-bottom:4px}
+  .pills{gap:3px}.pills span{font-size:7.6pt;padding:1px 6px}
+  .langs{position:static}.lang+.lang{margin-top:5px}
+  .lang-top{font-size:8.4pt;margin-bottom:2px}.lang-top span{font-size:7.6pt}
+  .meter{height:4px}
+  .edus{grid-template-columns:repeat(3,1fr);gap:6px}
+  .edu{padding:7px 9px;border-radius:8px}
+  .edu-deg{font-size:7pt}.edu h3{font-size:9.6pt;margin:3px 0 1px}.edu-meta{font-size:8pt}
+  #projects-en,#projects-ko,#projects-ru,#projects-uz{break-before:page;margin-top:0}
+  a{text-decoration:none}
+}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
 </head>
@@ -216,11 +272,11 @@ h1 em{display:block;font-style:normal;color:var(--dim);font-weight:600;font-size
       <p class="lead">Software &amp; AI Engineer building LLM systems that run inside real engineering software. At BSP Engineering I connect AI agents to Autodesk Revit through an MCP server and automate fabrication isometrics, weld lists and BOMs for semiconductor-fab piping. Before that, four years of full-stack and DevOps work with NestJS, Next.js and Docker.</p>
       <div class="cta">
         <a class="btn btn-p" href="mailto:bobur.rakhimboevv@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Email me</a>
-        <a class="btn btn-s" href="cv/Bobur_Rakhimboev_CV.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></svg>Download CV</a>
+        <button class="btn btn-s pdf" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></svg>Save as PDF</button>
         <a class="btn btn-i" href="https://github.com/Max19942008" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg></a>
         <a class="btn btn-i" href="https://www.linkedin.com/in/bobur-rahimboyev-2068a7249/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg></a>
       </div>
-      <div class="meta"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Pyeongtaek, South Korea</span><a href="tel:+821066252908"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg>+82 10-6625-2908</a></div>
+      <div class="meta"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Pyeongtaek, South Korea</span><a href="tel:+821066252908"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg>+82 10-6625-2908</a><a class="po" href="mailto:bobur.rakhimboevv@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>bobur.rakhimboevv@gmail.com</a><a class="po" href="https://github.com/Max19942008"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>github.com/Max19942008</a><a class="po" href="https://max19942008.github.io/">🌐 max19942008.github.io</a></div>
     </div>
     <div class="portrait"><div class="portrait-bg"></div><img src="photo.webp" width="359" height="451" alt="Bobur Rakhimboev"></div>
   </div>
@@ -355,11 +411,11 @@ h1 em{display:block;font-style:normal;color:var(--dim);font-weight:600;font-size
       <p class="lead">실제 엔지니어링 소프트웨어 안에서 동작하는 LLM 시스템을 만드는 소프트웨어 &amp; AI 엔지니어입니다. BSP Engineering에서 MCP 서버를 통해 AI 에이전트를 Autodesk Revit에 연결하고, 반도체 팹 배관의 제작용 아이소메트릭 도면, 용접 리스트, BOM 작성을 자동화하고 있습니다. 그전에는 NestJS, Next.js, Docker로 4년간 풀스택 및 DevOps 업무를 수행했습니다.</p>
       <div class="cta">
         <a class="btn btn-p" href="mailto:bobur.rakhimboevv@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>이메일 보내기</a>
-        <a class="btn btn-s" href="cv/Bobur_Rakhimboev_CV.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></svg>이력서 다운로드</a>
+        <button class="btn btn-s pdf" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></svg>PDF로 저장</button>
         <a class="btn btn-i" href="https://github.com/Max19942008" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg></a>
         <a class="btn btn-i" href="https://www.linkedin.com/in/bobur-rahimboyev-2068a7249/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg></a>
       </div>
-      <div class="meta"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>대한민국 평택</span><a href="tel:+821066252908"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg>+82 10-6625-2908</a></div>
+      <div class="meta"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>대한민국 평택</span><a href="tel:+821066252908"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg>+82 10-6625-2908</a><a class="po" href="mailto:bobur.rakhimboevv@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>bobur.rakhimboevv@gmail.com</a><a class="po" href="https://github.com/Max19942008"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>github.com/Max19942008</a><a class="po" href="https://max19942008.github.io/">🌐 max19942008.github.io</a></div>
     </div>
     <div class="portrait"><div class="portrait-bg"></div><img src="photo.webp" width="359" height="451" alt="라힘보예프 보부르"></div>
   </div>
@@ -494,11 +550,11 @@ h1 em{display:block;font-style:normal;color:var(--dim);font-weight:600;font-size
       <p class="lead">Software &amp; AI Engineer: создаю LLM-системы, которые работают внутри настоящего инженерного ПО. В BSP Engineering подключаю AI-агентов к Autodesk Revit через MCP-сервер и автоматизирую изометрические чертежи, ведомости сварных швов и BOM для трубопроводов полупроводниковых заводов. До этого — четыре года full-stack и DevOps на NestJS, Next.js и Docker.</p>
       <div class="cta">
         <a class="btn btn-p" href="mailto:bobur.rakhimboevv@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Написать</a>
-        <a class="btn btn-s" href="cv/Bobur_Rakhimboev_CV.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></svg>Скачать резюме</a>
+        <button class="btn btn-s pdf" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></svg>Сохранить PDF</button>
         <a class="btn btn-i" href="https://github.com/Max19942008" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg></a>
         <a class="btn btn-i" href="https://www.linkedin.com/in/bobur-rahimboyev-2068a7249/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg></a>
       </div>
-      <div class="meta"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Пхёнтхэк, Южная Корея</span><a href="tel:+821066252908"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg>+82 10-6625-2908</a></div>
+      <div class="meta"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Пхёнтхэк, Южная Корея</span><a href="tel:+821066252908"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg>+82 10-6625-2908</a><a class="po" href="mailto:bobur.rakhimboevv@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>bobur.rakhimboevv@gmail.com</a><a class="po" href="https://github.com/Max19942008"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>github.com/Max19942008</a><a class="po" href="https://max19942008.github.io/">🌐 max19942008.github.io</a></div>
     </div>
     <div class="portrait"><div class="portrait-bg"></div><img src="photo.webp" width="359" height="451" alt="Бобур Рахимбоев"></div>
   </div>
@@ -633,11 +689,11 @@ h1 em{display:block;font-style:normal;color:var(--dim);font-weight:600;font-size
       <p class="lead">Haqiqiy muhandislik dasturlari ichida ishlaydigan LLM tizimlarini yaratadigan Software &amp; AI Engineer. BSP Engineering'da AI agentlarini MCP server orqali Autodesk Revit'ga ulayman hamda yarimo'tkazgich zavodlari quvurlari uchun izometrik chizmalar, payvand ro'yxatlari va BOM tayyorlashni avtomatlashtiraman. Undan oldin NestJS, Next.js va Docker bilan to'rt yil full-stack va DevOps ishida bo'lganman.</p>
       <div class="cta">
         <a class="btn btn-p" href="mailto:bobur.rakhimboevv@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Email yozish</a>
-        <a class="btn btn-s" href="cv/Bobur_Rakhimboev_CV.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></svg>CV yuklab olish</a>
+        <button class="btn btn-s pdf" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></svg>PDF saqlash</button>
         <a class="btn btn-i" href="https://github.com/Max19942008" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg></a>
         <a class="btn btn-i" href="https://www.linkedin.com/in/bobur-rahimboyev-2068a7249/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg></a>
       </div>
-      <div class="meta"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Pyontek, Janubiy Koreya</span><a href="tel:+821066252908"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg>+82 10-6625-2908</a></div>
+      <div class="meta"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Pyontek, Janubiy Koreya</span><a href="tel:+821066252908"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg>+82 10-6625-2908</a><a class="po" href="mailto:bobur.rakhimboevv@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>bobur.rakhimboevv@gmail.com</a><a class="po" href="https://github.com/Max19942008"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>github.com/Max19942008</a><a class="po" href="https://max19942008.github.io/">🌐 max19942008.github.io</a></div>
     </div>
     <div class="portrait"><div class="portrait-bg"></div><img src="photo.webp" width="359" height="451" alt="Bobur Rahimboyev"></div>
   </div>
@@ -768,6 +824,7 @@ h1 em{display:block;font-style:normal;color:var(--dim);font-weight:600;font-size
     if(push) history.replaceState(null,'','#'+l);
   }
   document.querySelectorAll('[data-set]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();show(a.dataset.set,true);window.scrollTo(0,0);});});
+  document.querySelectorAll('.pdf').forEach(function(b){b.addEventListener('click',function(){window.print();});});
   document.querySelectorAll('.yr').forEach(function(s){s.textContent=new Date().getFullYear();});
   var h=location.hash.slice(1), q=new URLSearchParams(location.search).get('lang'), saved=store('lang'), nav=(navigator.language||'').slice(0,2);
   show(langs.indexOf(h)>=0?h:(langs.indexOf(q)>=0?q:(langs.indexOf(saved)>=0?saved:(langs.indexOf(nav)>=0?nav:'en'))),false);
