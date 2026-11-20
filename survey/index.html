@@ -126,6 +126,7 @@
 </div>
 
 <script>
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxlcVsuaHdB3BDmQ8NjTgY4oaCMlmHJOg4wkhPYWx_ppEf37KvwcIcxmzeTfh6pG0Fo/exec';
 const CATS = [
   ["① 이유·원인 / Sabab", ["-아서/어서","-(으)니까","-느라고","-는 바람에","-(으)ㄴ/는 탓에","-(으)ㄹ까 봐"]],
   ["② 조건·가정 / Shart", ["-(으)면","-아/어야","-더라도","-거든"]],
@@ -173,9 +174,14 @@ document.getElementById('f').addEventListener('submit', async (e)=>{
   data['혼동쌍']=fd.getAll('혼동쌍').join(', ');
   data['어려운이유']=fd.getAll('어려운이유').join(', ');
   try{
-    const r=await fetch('https://api.web3forms.com/submit',{method:'POST',
-      headers:{'Content-Type':'application/json',Accept:'application/json'}, body:JSON.stringify(data)});
-    const j=await r.json();
+    // 1) Google Sheet + Notion (Apps Script), 2) email (Web3Forms) — bittasi ishlasa yetarli
+    const toSheet=fetch(APPS_SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body:JSON.stringify(data)}).then(r=>r.json()).then(j=>!!j.ok).catch(()=>false);
+    const toMail=fetch('https://api.web3forms.com/submit',{method:'POST',
+      headers:{'Content-Type':'application/json',Accept:'application/json'}, body:JSON.stringify(data)})
+      .then(r=>r.json()).then(j=>!!j.success).catch(()=>false);
+    const [okSheet,okMail]=await Promise.all([toSheet,toMail]);
+    const j={success: okSheet||okMail, message:''};
     if(j.success){ document.getElementById('f').style.display='none'; document.getElementById('ok').style.display='block'; window.scrollTo(0,0); }
     else{ btn.disabled=false; btn.textContent='다시 제출 / Qayta yuborish'; alert('오류 / Xato: '+(j.message||'')); }
   }catch(err){ btn.disabled=false; btn.textContent='다시 제출 / Qayta yuborish'; alert('네트워크 오류 / Tarmoq xatosi'); }
