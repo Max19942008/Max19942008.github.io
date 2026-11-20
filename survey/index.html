@@ -5,41 +5,57 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>한국어 문법 설문 / Grammatika so'rovnomasi</title>
 <style>
-  :root{ --bg:#f4f5fb; --card:#ffffff; --ink:#1a1c2b; --muted:#6b7090; --line:#e3e5f0; --brand:#4b50c4; --brand2:#eef0fb; }
+  :root{ --bg:#f4f5fb; --card:#ffffff; --ink:#1a1c2b; --muted:#6b7090; --line:#e3e5f0; --brand:#4b50c4; --brand2:#eef0fb; --warn:#d23; }
   *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
   body{ margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",sans-serif;
         background:var(--bg); color:var(--ink); line-height:1.5; }
-  .wrap{ max-width:640px; margin:0 auto; padding:16px; }
+  .wrap{ max-width:660px; margin:0 auto; padding:16px; }
   header{ background:linear-gradient(135deg,#4b50c4,#6a70e0); color:#fff; border-radius:18px; padding:22px 20px; margin:8px 0 18px; }
   header h1{ font-size:19px; margin:0 0 6px; line-height:1.35; }
   header p{ font-size:13px; margin:0; opacity:.92; }
-  .card{ background:var(--card); border:1px solid var(--line); border-radius:16px; padding:16px 16px 6px; margin-bottom:14px; }
+  .progress{ position:sticky; top:0; z-index:5; background:var(--bg); padding:6px 0 10px; }
+  .bar{ height:6px; background:var(--line); border-radius:6px; overflow:hidden; }
+  .bar i{ display:block; height:100%; width:0; background:var(--brand); transition:width .2s; }
+  .ptxt{ font-size:11px; color:var(--muted); margin-top:3px; text-align:right; }
+  .card{ background:var(--card); border:1px solid var(--line); border-radius:16px; padding:16px 16px 8px; margin-bottom:14px; }
   .sec{ font-size:15px; font-weight:700; color:var(--brand); margin:2px 0 4px; }
-  .sec small{ display:block; font-weight:500; color:var(--muted); font-size:12px; margin-top:2px; }
-  .q{ margin:14px 0; }
-  .q > label.qt{ display:block; font-weight:600; font-size:14px; margin-bottom:8px; }
-  .q small.uz{ color:var(--muted); font-weight:400; }
-  .opts label{ display:flex; align-items:center; gap:8px; padding:9px 11px; border:1px solid var(--line);
+  .sec small, .note{ display:block; font-weight:500; color:var(--muted); font-size:12px; margin-top:2px; }
+  .sub{ font-size:13px; font-weight:700; color:var(--brand); margin:16px 0 4px; }
+  .q{ margin:14px 0; scroll-margin-top:60px; }
+  .q > .qt{ display:block; font-weight:600; font-size:14px; margin-bottom:8px; }
+  .uz{ color:var(--muted); font-weight:400; }
+  .opts label{ display:flex; align-items:flex-start; gap:8px; padding:9px 11px; border:1px solid var(--line);
                border-radius:10px; margin-bottom:7px; font-size:14px; cursor:pointer; }
-  .opts input{ accent-color:var(--brand); width:17px; height:17px; }
-  .scalehead{ display:flex; justify-content:space-between; font-size:11px; color:var(--muted); margin:0 2px 8px; }
+  .opts input{ accent-color:var(--brand); width:17px; height:17px; margin-top:2px; flex:0 0 auto; }
+  .opts.inline{ display:flex; flex-wrap:wrap; gap:6px; }
+  .opts.inline label{ margin:0; }
+  .consent{ font-size:13px; color:var(--ink); background:var(--brand2); border-radius:12px; padding:12px 14px; }
+  .consent ul{ margin:6px 0 0; padding-left:18px; }
+  .scalehead{ display:flex; justify-content:flex-end; gap:4px; font-size:10px; color:var(--muted); margin:4px 0 0; }
+  .scalehead span{ width:30px; text-align:center; }
   .grid .row{ display:flex; align-items:center; justify-content:space-between; gap:6px;
-              padding:8px 2px; border-bottom:1px solid var(--line); }
+              padding:8px 2px; border-bottom:1px solid var(--line); scroll-margin-top:60px; }
   .grid .row:last-child{ border-bottom:none; }
-  .grid .gl{ font-size:14px; font-weight:600; flex:1 1 auto; }
+  .grid .gl{ font-size:14px; font-weight:600; flex:1 1 auto; min-width:0; }
+  .grid .gl small{ display:block; font-weight:400; color:var(--muted); font-size:12px; }
   .grid .scale{ display:flex; gap:4px; flex:0 0 auto; }
   .grid .scale label{ width:30px; height:34px; display:flex; align-items:center; justify-content:center;
                       border:1px solid var(--line); border-radius:8px; font-size:13px; cursor:pointer; position:relative; }
+  .grid .scale label.na{ color:var(--muted); }
   .grid .scale input{ position:absolute; opacity:0; inset:0; margin:0; cursor:pointer; }
   .grid .scale input:checked + span{ position:absolute; inset:0; background:var(--brand); color:#fff;
                       border-radius:7px; display:flex; align-items:center; justify-content:center; }
-  textarea{ width:100%; border:1px solid var(--line); border-radius:10px; padding:10px; font:inherit; min-height:70px; resize:vertical; }
+  .test .stem{ font-size:15px; font-weight:600; margin-bottom:8px; }
+  .missing{ outline:2px solid var(--warn); outline-offset:3px; border-radius:10px; }
+  textarea{ width:100%; border:1px solid var(--line); border-radius:10px; padding:10px; font:inherit; min-height:70px; resize:vertical; background:var(--card); color:var(--ink); }
   button{ width:100%; background:var(--brand); color:#fff; border:none; border-radius:12px;
-          padding:15px; font-size:16px; font-weight:700; cursor:pointer; margin:6px 0 30px; }
+          padding:15px; font-size:16px; font-weight:700; cursor:pointer; margin:6px 0 10px; }
   button:disabled{ opacity:.6; }
+  .err{ color:var(--warn); font-size:13px; text-align:center; min-height:20px; margin-bottom:24px; }
   .ok{ display:none; text-align:center; padding:40px 16px; }
   .ok h2{ color:var(--brand); }
-  .req{ color:#d23; }
+  .req{ color:var(--warn); }
+  @media (max-width:420px){ .grid .scale label{ width:27px; } .scalehead span{ width:27px; } }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){ --bg:#15171f; --card:#1e2130; --ink:#eef0fb; --muted:#9aa0c0; --line:#31344a; --brand2:#262a46; }
   }
@@ -47,145 +63,270 @@
 </head>
 <body>
 <div class="wrap">
-  <form id="f">
+  <form id="f" novalidate>
     <header>
-      <h1>우즈베크어권 한국어 학습자 문법 설문</h1>
-      <p>O'zbek tilli koreys tili o'rganuvchilari uchun grammatika so'rovnomasi · 익명 / anonim · ~5 min</p>
+      <h1>우즈베크어권 한국어 학습자의 중급 문법 인식 조사</h1>
+      <p>O'zbek tilli koreys tili o'rganuvchilarining o'rta daraja grammatikani idrok etishi bo'yicha so'rovnoma · 익명 / anonim · 약 12–15분 / ~12–15 daqiqa</p>
     </header>
+    <div class="progress"><div class="bar"><i id="pbar"></i></div><div class="ptxt" id="ptxt">0%</div></div>
 
     <!-- hidden -->
     <input type="hidden" name="access_key" value="f147079d-cbdd-49a2-9c46-fe82b9500504">
-    <input type="hidden" name="subject" value="새 설문 응답 - 우즈베크어권 학습자 문법">
-    <input type="checkbox" name="botcheck" style="display:none">
+    <input type="hidden" name="subject" value="새 설문 응답(v2) - 우즈베크어권 학습자 문법">
+    <input type="hidden" name="설문버전" value="v2">
+    <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
 
+    <!-- 0. 연구 참여 안내 및 동의 -->
     <div class="card">
-      <div class="sec">Ⅰ. 기본 정보 <small>Shaxsiy ma'lumotlar</small></div>
-      <div class="q"><label class="qt">성별 <small class="uz">/ Jins</small></label>
+      <div class="sec">연구 참여 안내 및 동의 <small>Tadqiqotda ishtirok etish haqida ma'lumot va rozilik</small></div>
+      <div class="consent">
+        본 설문은 중부대학교 대학원 박사학위 논문 「한국어와 우즈베크어 중급 문법 항목의 대조 분석 및 교육 방안 연구」를 위한 조사입니다.
+        <span class="uz">/ Ushbu so'rovnoma Jungbu universiteti doktorlik dissertatsiyasi uchun o'tkazilmoqda.</span>
+        <ul>
+          <li>참여는 자발적이며 언제든지 중단할 수 있습니다. <span class="uz">/ Ishtirok ixtiyoriy, istalgan payt to'xtatishingiz mumkin.</span></li>
+          <li>이름, 연락처 등 개인을 식별할 수 있는 정보는 수집하지 않습니다. <span class="uz">/ Ism, telefon kabi shaxsiy ma'lumotlar yig'ilmaydi.</span></li>
+          <li>응답은 연구 목적으로만 사용되며 결과는 통계적으로만 제시됩니다. <span class="uz">/ Javoblar faqat ilmiy maqsadda, umumlashtirilgan holda ishlatiladi.</span></li>
+          <li>정답·오답에 따른 불이익은 없습니다. 아는 대로 솔직하게 답해 주세요. <span class="uz">/ To'g'ri-noto'g'ri javob uchun hech qanday oqibat yo'q. Samimiy javob bering.</span></li>
+        </ul>
+      </div>
+      <div class="q" data-req="동의">
         <div class="opts">
-          <label><input type="radio" name="성별" value="남/Erkak">남 / Erkak</label>
-          <label><input type="radio" name="성별" value="여/Ayol">여 / Ayol</label>
-        </div></div>
-      <div class="q"><label class="qt">한국어 학습 기간 <small class="uz">/ O'rganish muddati</small> <span class="req">*</span></label>
-        <div class="opts">
-          <label><input type="radio" name="학습기간" value="1년미만" required>1년 미만 / 1 yildan kam</label>
-          <label><input type="radio" name="학습기간" value="1-2년">1~2년 / 1~2 yil</label>
-          <label><input type="radio" name="학습기간" value="3-4년">3~4년 / 3~4 yil</label>
-          <label><input type="radio" name="학습기간" value="5년이상">5년 이상 / 5 yildan ortiq</label>
-        </div></div>
-      <div class="q"><label class="qt">현재 TOPIK 등급 <small class="uz">/ TOPIK darajasi</small> <span class="req">*</span></label>
-        <div class="opts">
-          <label><input type="radio" name="TOPIK등급" value="없음" required>없음 / Yo'q</label>
-          <label><input type="radio" name="TOPIK등급" value="1-2급">1~2급</label>
-          <label><input type="radio" name="TOPIK등급" value="3-4급">3~4급</label>
-          <label><input type="radio" name="TOPIK등급" value="5-6급">5~6급</label>
-        </div></div>
-      <div class="q"><label class="qt">학습 목적 <small class="uz">/ Maqsad</small></label>
-        <div class="opts">
-          <label><input type="radio" name="학습목적" value="유학">유학 / Ta'lim</label>
-          <label><input type="radio" name="학습목적" value="취업EPS">취업(EPS) / Ish (EPS)</label>
-          <label><input type="radio" name="학습목적" value="결혼이주">결혼·이주 / Nikoh</label>
-          <label><input type="radio" name="학습목적" value="기타">기타 / Boshqa</label>
-        </div></div>
+          <label><input type="checkbox" name="동의" value="true">위 내용을 읽고 이해했으며, 만 18세 이상으로서 연구 참여에 동의합니다. <span class="uz">/ Yuqoridagilarni o'qidim, 18 yoshdan kattaman va ishtirok etishga roziman.</span> <span class="req">*</span></label>
+        </div>
+      </div>
     </div>
 
+    <!-- Ⅰ. 기본 정보 -->
+    <div class="card">
+      <div class="sec">Ⅰ. 기본 정보 <small>Umumiy ma'lumotlar</small></div>
+      <div id="basic"></div>
+    </div>
+
+    <!-- Ⅱ. 문법 지식 확인 -->
+    <div class="card test">
+      <div class="sec">Ⅱ. 문법 확인 문제 <small>Grammatik topshiriqlar — ( ) ichiga eng mos shaklni tanlang. Bilmasangiz, «모르겠어요»ni belgilang. Lug'at yoki tarjimondan foydalanmang.</small></div>
+      <div class="note">( )에 가장 알맞은 것을 고르십시오. 모르면 '모르겠어요'를 고르십시오. 사전이나 번역기는 사용하지 마십시오.</div>
+      <div id="test"></div>
+    </div>
+
+    <!-- Ⅲ. 문법 항목별 어려움 -->
     <div class="card" id="scalecard">
-      <div class="sec">Ⅱ. 문법 항목별 어려움 <small>Har bir grammatika qanchalik qiyin? (1=쉬움/oson, 5=어려움/qiyin)</small></div>
-      <div class="scalehead"><span>쉬움 / oson</span><span>어려움 / qiyin</span></div>
-      <!-- GRID GROUPS injected by script -->
+      <div class="sec">Ⅲ. 문법 항목별 어려움 <small>Har bir grammatika siz uchun qanchalik qiyin?</small></div>
+      <div class="note">1 = 매우 쉬움 / juda oson · 2 = 쉬움 / oson · 3 = 보통 / o'rtacha · 4 = 어려움 / qiyin · 5 = 매우 어려움 / juda qiyin · <b>?</b> = 모름·배우지 않음 / bilmayman, o'rganmaganman</div>
+      <div class="scalehead"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>?</span></div>
     </div>
 
+    <!-- Ⅳ. 혼동 -->
     <div class="card">
-      <div class="sec">Ⅲ. 혼동하는 형태 <small>Farqlash qiyin bo'lgan juftliklarni belgilang</small></div>
-      <div class="q"><div class="opts" id="pairs"></div></div>
+      <div class="sec">Ⅳ. 혼동하는 형태 <small>Farqlash qiyin bo'lgan juftliklar (barchasini belgilang)</small></div>
+      <div class="q" data-req="혼동쌍"><span class="qt">구별하기 어려운 것을 모두 고르십시오. <span class="req">*</span></span><div class="opts" id="pairs"></div></div>
     </div>
 
+    <!-- Ⅴ. 어려운 이유 -->
     <div class="card">
-      <div class="sec">Ⅳ. 자유 응답 <small>Erkin javob</small></div>
-      <div class="q"><label class="qt">문법이 어려운 이유는? <small class="uz">/ Grammatika nega qiyin? (해당하는 것 모두 / barchasini belgilang)</small></label>
-        <div class="opts" id="why"></div></div>
-      <div class="q"><label class="qt">가장 어려운 문법 하나와 그 이유 <small class="uz">/ Eng qiyin bitta grammatika va sababi</small></label>
-        <textarea name="가장어려운문법"></textarea></div>
-      <div class="q"><label class="qt">우즈베크어와 비교 설명이 도움이 됩니까? <small class="uz">/ O'zbekcha taqqoslab tushuntirilsa foydalimi?</small></label>
-        <div class="opts">
-          <label><input type="radio" name="모어비교효용" value="매우그렇다">매우 그렇다 / Albatta</label>
-          <label><input type="radio" name="모어비교효용" value="그렇다">그렇다 / Ha</label>
-          <label><input type="radio" name="모어비교효용" value="보통">보통 / O'rtacha</label>
-          <label><input type="radio" name="모어비교효용" value="아니다">아니다 / Yo'q</label>
-        </div></div>
-      <div class="q"><label class="qt">바라는 점 <small class="uz">/ Istaklaringiz</small></label>
-        <textarea name="바라는점"></textarea></div>
+      <div class="sec">Ⅴ. 문법이 어려운 이유 <small>Grammatika nega qiyin? (barchasini belgilang)</small></div>
+      <div class="q" data-req="어려운이유"><span class="qt">해당하는 것을 모두 고르십시오. <span class="req">*</span></span><div class="opts" id="why"></div></div>
+    </div>
+
+    <!-- Ⅵ. 학습 인식 -->
+    <div class="card">
+      <div class="sec">Ⅵ. 문법 학습에 대한 생각 <small>Grammatika o'rganish haqidagi fikringiz</small></div>
+      <div class="note">1 = 전혀 그렇지 않다 / umuman yo'q · 2 = 그렇지 않다 / yo'q · 3 = 보통이다 / o'rtacha · 4 = 그렇다 / ha · 5 = 매우 그렇다 / albatta</div>
+      <div class="scalehead"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+      <div class="grid" id="likert"></div>
+    </div>
+
+    <!-- Ⅶ. 자유 응답 -->
+    <div class="card">
+      <div class="sec">Ⅶ. 자유 응답 <small>Erkin javob (ixtiyoriy)</small></div>
+      <div class="q"><span class="qt">가장 어려운 한국어 문법 하나와 그 이유 <span class="uz">/ Eng qiyin bitta grammatika va sababi</span></span>
+        <textarea name="가장어려운문법" maxlength="1500"></textarea></div>
+      <div class="q"><span class="qt">문법 교육(수업, 교재)에 바라는 점 <span class="uz">/ Grammatika ta'limi (dars, darslik) bo'yicha istaklaringiz</span></span>
+        <textarea name="바라는점" maxlength="1500"></textarea></div>
     </div>
 
     <button type="submit" id="sub">제출하기 / Yuborish</button>
+    <div class="err" id="err"></div>
   </form>
 
   <div class="ok" id="ok">
     <h2>감사합니다! Rahmat!</h2>
-    <p>응답이 제출되었습니다.<br>Javobingiz qabul qilindi.</p>
+    <p>응답이 제출되었습니다. 연구에 참여해 주셔서 감사합니다.<br>Javobingiz qabul qilindi. Ishtirokingiz uchun rahmat!</p>
   </div>
 </div>
 
 <script>
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxlcVsuaHdB3BDmQ8NjTgY4oaCMlmHJOg4wkhPYWx_ppEf37KvwcIcxmzeTfh6pG0Fo/exec';
+const T0 = Date.now();
+
+/* Ⅰ. 기본 정보 — [name, 한국어, o'zbekcha, type, [[value,label]...], required] */
+const BASIC = [
+  ['성별','성별','Jins','radio',[['남/Erkak','남 / Erkak'],['여/Ayol','여 / Ayol'],['응답안함','응답하지 않음 / Aytmayman']],true],
+  ['나이','나이','Yosh','radio',[['18-24','18–24세'],['25-29','25–29세'],['30-39','30–39세'],['40이상','40세 이상 / 40 va undan katta']],true],
+  ['모어','모어(가장 편한 언어)','Ona tili (eng yaxshi biladigan tilingiz)','radio',[['우즈베크어','우즈베크어 / O\'zbek tili'],['러시아어','러시아어 / Rus tili'],['카라칼파크어','카라칼파크어 / Qoraqalpoq tili'],['타지크어','타지크어 / Tojik tili'],['기타','기타 / Boshqa']],true],
+  ['러시아어능력','러시아어 능력','Rus tilini bilish darajangiz','radio',[['못함','못함 / Bilmayman'],['기초','기초 / Boshlang\'ich'],['중급','중급 / O\'rta'],['유창','유창함 / Erkin']],true],
+  ['거주국가','현재 거주 국가','Hozir qaysi davlatda yashaysiz','radio',[['우즈베키스탄','우즈베키스탄 / O\'zbekiston'],['한국','한국 / Koreya'],['기타','기타 / Boshqa']],true],
+  ['학습기간','한국어 학습 기간','Koreys tilini o\'rganish muddati','radio',[['1년미만','1년 미만 / 1 yildan kam'],['1-2년','1~2년 / 1–2 yil'],['3-4년','3~4년 / 3–4 yil'],['5년이상','5년 이상 / 5 yil va undan ko\'p']],true],
+  ['TOPIK등급','TOPIK 최고 등급','Eng yuqori TOPIK darajangiz','radio',[['없음','없음 / Yo\'q'],['1급','1급'],['2급','2급'],['3급','3급'],['4급','4급'],['5급','5급'],['6급','6급']],true],
+  ['학습목적','주된 학습 목적','Asosiy maqsadingiz','radio',[['유학','유학 / Ta\'lim (o\'qish)'],['취업EPS','취업(EPS) / Ish (EPS)'],['결혼이주','결혼·이주 / Nikoh, ko\'chib o\'tish'],['한류관심','한류·문화 관심 / K-madaniyatga qiziqish'],['기타','기타 / Boshqa']],true],
+  ['학습환경','주요 학습 환경 (모두 선택)','Qayerda o\'rgangansiz (barchasini belgilang)','checkbox',[['세종학당','세종학당 / Sejong instituti'],['대학','대학 / Universitet'],['사설학원','사설 학원 / Xususiy o\'quv markazi'],['독학','독학(온라인 포함) / Mustaqil (onlayn)'],['기타','기타 / Boshqa']],true],
+  ['한국체류','한국 체류 경험','Koreyada yashagan muddatingiz','radio',[['없음','없음 / Yo\'q'],['6개월미만','6개월 미만 / 6 oydan kam'],['6개월-2년','6개월~2년 / 6 oy – 2 yil'],['2년이상','2년 이상 / 2 yil va undan ko\'p']],true],
+];
+
+/* Ⅱ. 문법 확인 문제 — 의미 기능별 2문항, 대조 분석(Ⅳ장)에서 예측한 혼동 형태를 오답지로 사용 */
+const TEST = [
+  ['비가 ( ) 우산을 가지고 가세요.', ['와서','오느라고','오니까','오는 바람에'], 2],
+  ['버스가 갑자기 ( ) 넘어졌어요.', ['서는 바람에','서느라고','서려면','서더라도'], 0],
+  ['내일 비가 ( ) 소풍은 예정대로 갈 거예요.', ['오면','와야','오거든','오더라도'], 3],
+  ['서울에 ( ) 바로 연락하세요.', ['도착하더라도','도착하거든','도착해야','도착하느라고'], 1],
+  ['길이 다 젖어 있네요. 밤에 비가 ( ).', ['올 리가 없어요','올까 봐요','왔나 봐요','오려고 해요'], 2],
+  ['민수 씨는 성실한 사람이라서 약속을 ( ).', ['잊을 리가 없어요','잊었나 봐요','잊을까 봐요','잊는 모양이에요'], 0],
+  ['창문이 ( ) 방이 좀 추워요.', ['열고 있어서','열어 있어서','열려 있어서'], 2],
+  ['너무 피곤해서 옷을 ( ) 잠이 들었어요.', ['입는 대로','입은 채로','입다가 보니','입고 있어서'], 1],
+  ['한국어는 ( ) 재미있어요.', ['배우는 반면에','배우는 김에','배울수록','배우는 데다가'], 2],
+  ['형은 키가 큰 ( ) 동생은 키가 작아요.', ['데다가','반면에','정도로','김에'], 1],
+  ['집에 ( ) 손부터 씻었어요.', ['들어오는 김에','들어오다가','들어왔더니','들어오자마자'], 3],
+  ['아침에 일찍 ( ) 길이 하나도 안 막혔어요.', ['출발했더니','출발하자마자','출발하다가','출발한 김에'], 0],
+  ['그 식당은 음식이 맛있는 ( ) 값도 싸요.', ['반면에','데다가','대로','채로'], 1],
+  ['주말에 ( ) 하루 종일 일만 했어요.', ['쉬는 데다가','쉬는 대로','쉬기는커녕','쉬는 반면에'], 2],
+];
+
+/* Ⅲ. 어려움 평가 — [항목, 예문] */
 const CATS = [
-  ["① 이유·원인 / Sabab", ["-아서/어서","-(으)니까","-느라고","-는 바람에","-(으)ㄴ/는 탓에","-(으)ㄹ까 봐"]],
-  ["② 조건·가정 / Shart", ["-(으)면","-아/어야","-더라도","-거든"]],
-  ["③ 추측·양태 / Taxmin", ["-(으)ㄹ 것 같다","-나 보다","-(으)ㄹ지(도) 모르다","-(으)ㄹ 리가 없다","-(으)ㄴ/는 모양이다"]],
-  ["④ 상태·배경 / Holat", ["-고 있다","-아/어 있다","-(으)ㄴ 채(로)","-는 대로","-다(가) 보니"]],
-  ["⑤ 정도·비교 / Daraja", ["-보다","-(으)ㄹ수록","-(으)ㄹ 정도로","-(으)ㄴ/는 반면에"]],
-  ["⑥ 시간·순서 / Vaqt", ["-자마자","-다가","-았/었더니","-(으)ㄴ/는 김에"]],
-  ["⑦ 나열·대조 / Sanash", ["-(으)ㄴ/는데","-(으)ㄴ/는 데다(가)","-(으)ㄴ/는커녕"]]
+  ['① 이유·원인 / Sabab', [['-아서/어서','배가 아파서 병원에 갔어요.'],['-(으)니까','시간이 없으니까 빨리 갑시다.'],['-느라고','숙제하느라고 잠을 못 잤어요.'],['-는 바람에','차가 막히는 바람에 늦었어요.'],['-(으)ㄴ/는 탓에','날씨가 추운 탓에 감기에 걸렸어요.'],['-(으)ㄹ까 봐','늦을까 봐 택시를 탔어요.']]],
+  ['② 조건·가정 / Shart', [['-(으)면','시간이 있으면 같이 가요.'],['-아/어야','매일 연습해야 잘할 수 있어요.'],['-더라도','힘들더라도 포기하지 마세요.'],['-거든','도착하거든 전화하세요.']]],
+  ['③ 추측·양태 / Taxmin', [['-(으)ㄹ 것 같다','곧 비가 올 것 같아요.'],['-나 보다','민수 씨가 요즘 바쁜가 봐요.'],['-(으)ㄹ지(도) 모르다','오늘 조금 늦을지도 몰라요.'],['-(으)ㄹ 리가 없다','그 사람이 거짓말을 할 리가 없어요.'],['-(으)ㄴ/는 모양이다','밖에 눈이 오는 모양이에요.']]],
+  ['④ 상태·배경 / Holat', [['-고 있다','지금 책을 읽고 있어요.'],['-아/어 있다','문이 열려 있어요.'],['-(으)ㄴ 채(로)','신발을 신은 채로 들어왔어요.'],['-는 대로','도착하는 대로 연락할게요.'],['-다(가) 보니','매일 연습하다 보니 실력이 늘었어요.']]],
+  ['⑤ 정도·비교 / Daraja', [['-보다','동생이 저보다 키가 커요.'],['-(으)ㄹ수록','친구는 만날수록 좋아요.'],['-(으)ㄹ 정도로','눈물이 날 정도로 웃었어요.'],['-(으)ㄴ/는 반면에','이 방은 넓은 반면에 좀 어두워요.']]],
+  ['⑥ 시간·순서 / Vaqt', [['-자마자','수업이 끝나자마자 나갔어요.'],['-다가','학교에 가다가 친구를 만났어요.'],['-았/었더니','운동을 했더니 건강해졌어요.'],['-(으)ㄴ/는 김에','시장에 간 김에 과일도 샀어요.']]],
+  ['⑦ 나열·대조 / Sanash', [['-(으)ㄴ/는데','비가 오는데 우산이 없어요.'],['-(으)ㄴ/는 데다(가)','비가 오는 데다가 바람도 불어요.'],['-(으)ㄴ/는커녕','밥은커녕 물도 못 마셨어요.']]],
 ];
-const PAIRS = ["-아서/어서 ↔ -(으)니까","-고 있다 ↔ -아/어 있다","-(으)ㄹ 것 같다 ↔ -나 보다",
-  "-느라고 ↔ -는 바람에","-(으)면 ↔ -(으)려면","-(으)ㄴ/는데 ↔ -지만"];
+const ATTN = { after: '-더라도', label: '주의 확인 / Diqqat', ex: "이 줄에서는 2를 고르십시오. / Bu qatorda 2 ni tanlang." };
+
+const PAIRS = ['-아서/어서 ↔ -(으)니까','-아서/어서 ↔ -는 바람에','-느라고 ↔ -는 바람에','-(으)면 ↔ -더라도','-(으)면 ↔ -(으)려면',
+  '-(으)ㄹ 것 같다 ↔ -나 보다','-(으)ㄹ 것 같다 ↔ -(으)ㄹ지(도) 모르다','-고 있다 ↔ -아/어 있다','-(으)ㄹ수록 ↔ -(으)면',
+  '-(으)ㄴ/는 반면에 ↔ -지만','-다가 ↔ -았/었더니','-(으)ㄴ/는데 ↔ -지만'];
 const WHY = [
-  "비슷한 문법이 많아서 무엇을 써야 할지 혼동된다 / O'xshash grammatika ko'p, qaysi birini ishlatishni bilmayman",
-  "우즈베크어에 없는 형태라서 이해하기 어렵다 / O'zbek tilida yo'q shakl, tushunish qiyin",
-  "형태(활용)가 복잡해서 / Shakli (tuslanishi) murakkab",
-  "언제, 어떤 상황에서 쓰는지 몰라서 / Qachon, qaysi vaziyatda ishlatishni bilmayman",
-  "의미 차이가 미세해서 / Ma'no farqi juda nozik"
+  '비슷한 문법이 많아서 무엇을 써야 할지 혼동된다 / O\'xshash grammatika ko\'p, qaysi birini ishlatishni bilmayman',
+  '우즈베크어에 없는 형태라서 이해하기 어렵다 / O\'zbek tilida yo\'q shakl, tushunish qiyin',
+  '우즈베크어와 비슷해 보이지만 쓰임이 달라서 / O\'zbekchaga o\'xshaydi, lekin ishlatilishi boshqacha',
+  '형태(활용)가 복잡해서 / Shakli (qo\'shimchalar bilan qo\'shilishi) murakkab',
+  '언제, 어떤 상황에서 쓰는지 몰라서 / Qachon, qaysi vaziyatda ishlatishni bilmayman',
+  '의미 차이가 미세해서 / Ma\'no farqi juda nozik',
+  '교재나 수업에서 충분히 설명·연습하지 않아서 / Darslik yoki darsda yetarli tushuntirilmagan, mashq qilinmagan',
+  '기타 / Boshqa',
 ];
-const card = document.getElementById('scalecard');
+const LIKERT = [
+  ['인식_모어비교효용','우즈베크어와 비교해서 설명하면 한국어 문법을 이해하는 데 도움이 된다.','O\'zbek tili bilan taqqoslab tushuntirilsa, koreys grammatikasini tushunish osonlashadi.'],
+  ['인식_번역전략','한국어 문법을 배울 때 우즈베크어로 바꾸어 생각하는 편이다.','Koreys grammatikasini o\'rganayotganda o\'zbekchaga tarjima qilib tushunaman.'],
+  ['인식_비교수업경험','수업이나 교재에서 우즈베크어와 비교한 설명을 자주 접했다.','Darsda yoki darslikda o\'zbek tili bilan taqqoslangan tushuntirishlarni tez-tez uchratganman.'],
+  ['인식_중급난이도','중급 문법은 초급 문법보다 훨씬 어렵다.','O\'rta daraja grammatikasi boshlang\'ichga qaraganda ancha qiyin.'],
+];
+
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+const L = ['A','B','C','D'];
+
+// Ⅰ
+const basic = document.getElementById('basic');
+BASIC.forEach(([name,ko,uz,type,opts,req])=>{
+  const q=document.createElement('div'); q.className='q'; if(req) q.dataset.req=name;
+  q.innerHTML='<span class="qt">'+esc(ko)+' <span class="uz">/ '+esc(uz)+'</span>'+(req?' <span class="req">*</span>':'')+'</span>'+
+    '<div class="opts'+(opts.length>4?'':'')+'">'+opts.map(([v,l])=>'<label><input type="'+type+'" name="'+esc(name)+'" value="'+esc(v)+'">'+esc(l)+'</label>').join('')+'</div>';
+  basic.appendChild(q);
+});
+
+// Ⅱ
+const test = document.getElementById('test');
+TEST.forEach(([stem,opts],i)=>{
+  const n='t'+(i+1);
+  const q=document.createElement('div'); q.className='q'; q.dataset.req=n;
+  q.innerHTML='<div class="stem">'+(i+1)+'. '+esc(stem)+'</div><div class="opts">'+
+    opts.map((o,j)=>'<label><input type="radio" name="'+n+'" value="'+L[j]+'">'+L[j]+'. '+esc(o)+'</label>').join('')+
+    '<label><input type="radio" name="'+n+'" value="?"><span class="uz">모르겠어요 / Bilmayman</span></label></div>';
+  test.appendChild(q);
+});
+
+// Ⅲ
+const card=document.getElementById('scalecard');
+function scaleRow(name,label,ex,withNA){
+  const row=document.createElement('div'); row.className='row'; row.dataset.req=name;
+  let h='<div class="gl">'+esc(label)+(ex?'<small>'+esc(ex)+'</small>':'')+'</div><div class="scale">';
+  for(let n=1;n<=5;n++) h+='<label><input type="radio" name="'+esc(name)+'" value="'+n+'"><span>'+n+'</span></label>';
+  if(withNA) h+='<label class="na"><input type="radio" name="'+esc(name)+'" value="0"><span>?</span></label>';
+  row.innerHTML=h+'</div>'; return row;
+}
 CATS.forEach(([title,items])=>{
-  const h=document.createElement('div'); h.className='sec'; h.style.fontSize='13px'; h.style.marginTop='14px'; h.textContent=title; card.appendChild(h);
+  const h=document.createElement('div'); h.className='sub'; h.textContent=title; card.appendChild(h);
   const g=document.createElement('div'); g.className='grid';
-  items.forEach(it=>{
-    const row=document.createElement('div'); row.className='row';
-    const gl=document.createElement('div'); gl.className='gl'; gl.textContent=it; row.appendChild(gl);
-    const sc=document.createElement('div'); sc.className='scale';
-    for(let n=1;n<=5;n++){ const l=document.createElement('label');
-      l.innerHTML='<input type="radio" name="난이도_'+it+'" value="'+n+'"><span>'+n+'</span>'; sc.appendChild(l); }
-    row.appendChild(sc); g.appendChild(row);
+  items.forEach(([it,ex])=>{
+    g.appendChild(scaleRow('난이도_'+it,it,ex,true));
+    if(it===ATTN.after) g.appendChild(scaleRow('__attn',ATTN.label,ATTN.ex,true));
   });
   card.appendChild(g);
 });
+
+// Ⅳ Ⅴ Ⅵ
 const pc=document.getElementById('pairs');
-PAIRS.forEach(p=>{ const l=document.createElement('label');
-  l.innerHTML='<input type="checkbox" name="혼동쌍" value="'+p+'">'+p; pc.appendChild(l); });
+pc.innerHTML=PAIRS.map(p=>'<label><input type="checkbox" name="혼동쌍" value="'+esc(p)+'">'+esc(p)+'</label>').join('')+
+  '<label><input type="checkbox" name="혼동쌍" value="없음" data-excl="1"><span>없음 / Yo\'q</span></label>';
 const wc=document.getElementById('why');
-WHY.forEach(w=>{ const l=document.createElement('label');
-  l.innerHTML='<input type="checkbox" name="어려운이유" value="'+w+'">'+w; wc.appendChild(l); });
+wc.innerHTML=WHY.map(w=>'<label><input type="checkbox" name="어려운이유" value="'+esc(w)+'">'+esc(w)+'</label>').join('');
+const lk=document.getElementById('likert');
+LIKERT.forEach(([name,ko,uz])=>{ const r=scaleRow(name,ko,uz,false); lk.appendChild(r); });
+
+// "없음" — boshqa juftliklar bilan birga tanlanmaydi
+pc.addEventListener('change',e=>{
+  if(e.target.dataset.excl && e.target.checked) pc.querySelectorAll('input:not([data-excl])').forEach(i=>i.checked=false);
+  else if(e.target.checked) pc.querySelector('[data-excl]').checked=false;
+});
+
+// progress
+const reqEls=()=>[...document.querySelectorAll('[data-req]')];
+function answered(name){ return [...document.getElementsByName(name)].some(i=>i.checked); }
+function updateProgress(){
+  const r=reqEls(); const done=r.filter(el=>answered(el.dataset.req)).length;
+  const p=Math.round(done/r.length*100);
+  document.getElementById('pbar').style.width=p+'%'; document.getElementById('ptxt').textContent=p+'%';
+}
+document.getElementById('f').addEventListener('change',e=>{
+  const holder=e.target.closest('[data-req]'); if(holder && answered(holder.dataset.req)) holder.classList.remove('missing');
+  updateProgress();
+});
 
 document.getElementById('f').addEventListener('submit', async (e)=>{
   e.preventDefault();
+  const err=document.getElementById('err'); err.textContent='';
+  const miss=reqEls().filter(el=>!answered(el.dataset.req));
+  miss.forEach(el=>el.classList.add('missing'));
+  if(miss.length){
+    err.textContent='답하지 않은 문항이 '+miss.length+'개 있습니다. / '+miss.length+' ta savolga javob berilmagan.';
+    miss[0].scrollIntoView({behavior:'smooth',block:'center'}); return;
+  }
   const btn=document.getElementById('sub'); btn.disabled=true; btn.textContent='전송 중… / Yuborilmoqda…';
-  const data=Object.fromEntries(new FormData(e.target).entries());
   const fd=new FormData(e.target);
-  data['혼동쌍']=fd.getAll('혼동쌍').join(', ');
-  data['어려운이유']=fd.getAll('어려운이유').join(', ');
+  const data={};
+  for(const [k,v] of fd.entries()){ if(!(k in data)) data[k]=v; }
+  ['혼동쌍','어려운이유','학습환경'].forEach(k=>{ data[k]=fd.getAll(k).join(', '); });
+  // test scoring
+  let score=0; const raw=[];
+  TEST.forEach((t,i)=>{ const v=data['t'+(i+1)]; delete data['t'+(i+1)];
+    const ok = v===L[t[2]] ? 1 : 0; score+=ok;
+    data['시험_'+String(i+1).padStart(2,'0')]=ok; raw.push((i+1)+':'+v); });
+  data['시험점수']=score; data['시험응답']=raw.join(' ');
+  data['주의확인']= data['__attn']==='2' ? 1 : 0; delete data['__attn'];
+  data['소요시간초']=Math.round((Date.now()-T0)/1000);
   try{
-    // 1) Google Sheet + Notion (Apps Script), 2) email (Web3Forms) — bittasi ishlasa yetarli
     const toSheet=fetch(APPS_SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},
       body:JSON.stringify(data)}).then(r=>r.json()).then(j=>!!j.ok).catch(()=>false);
     const toMail=fetch('https://api.web3forms.com/submit',{method:'POST',
       headers:{'Content-Type':'application/json',Accept:'application/json'}, body:JSON.stringify(data)})
       .then(r=>r.json()).then(j=>!!j.success).catch(()=>false);
     const [okSheet,okMail]=await Promise.all([toSheet,toMail]);
-    const j={success: okSheet||okMail, message:''};
-    if(j.success){ document.getElementById('f').style.display='none'; document.getElementById('ok').style.display='block'; window.scrollTo(0,0); }
-    else{ btn.disabled=false; btn.textContent='다시 제출 / Qayta yuborish'; alert('오류 / Xato: '+(j.message||'')); }
-  }catch(err){ btn.disabled=false; btn.textContent='다시 제출 / Qayta yuborish'; alert('네트워크 오류 / Tarmoq xatosi'); }
+    if(okSheet||okMail){ document.getElementById('f').style.display='none'; document.getElementById('ok').style.display='block'; window.scrollTo(0,0); }
+    else{ btn.disabled=false; btn.textContent='다시 제출 / Qayta yuborish'; err.textContent='전송 오류. 다시 시도해 주세요. / Yuborishda xato, qayta urinib ko\'ring.'; }
+  }catch(x){ btn.disabled=false; btn.textContent='다시 제출 / Qayta yuborish'; err.textContent='네트워크 오류 / Tarmoq xatosi'; }
 });
+updateProgress();
 </script>
 </body>
 </html>
