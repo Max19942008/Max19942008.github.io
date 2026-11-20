@@ -46,6 +46,9 @@
   .grid .scale input:checked + span{ position:absolute; inset:0; background:var(--brand); color:#fff;
                       border-radius:7px; display:flex; align-items:center; justify-content:center; }
   .test .stem{ font-size:15px; font-weight:600; margin-bottom:8px; }
+  .conf{ margin:2px 0 4px; padding:8px 10px; background:var(--brand2); border-radius:10px; }
+  .conf .note{ margin:0 0 6px; }
+  .conf .opts.inline label{ background:var(--card); }
   .missing{ outline:2px solid var(--warn); outline-offset:3px; border-radius:10px; }
   textarea{ width:100%; border:1px solid var(--line); border-radius:10px; padding:10px; font:inherit; min-height:70px; resize:vertical; background:var(--card); color:var(--ink); }
   button{ width:100%; background:var(--brand); color:#fff; border:none; border-radius:12px;
@@ -66,7 +69,7 @@
   <form id="f" novalidate>
     <header>
       <h1>우즈베크어권 한국어 학습자의 중급 문법 인식 조사</h1>
-      <p>O'zbek tilli koreys tili o'rganuvchilarining o'rta daraja grammatikani idrok etishi bo'yicha so'rovnoma · 익명 / anonim · 약 12–15분 / ~12–15 daqiqa</p>
+      <p>O'zbek tilli koreys tili o'rganuvchilarining o'rta daraja grammatikani idrok etishi bo'yicha so'rovnoma · 익명 / anonim · 약 15–18분 / ~15–18 daqiqa</p>
     </header>
     <div class="progress"><div class="bar"><i id="pbar"></i></div><div class="ptxt" id="ptxt">0%</div></div>
 
@@ -189,7 +192,17 @@ const TEST = [
   ['아침에 일찍 ( ) 길이 하나도 안 막혔어요.', ['출발했더니','출발하자마자','출발하다가','출발한 김에'], 0],
   ['그 식당은 음식이 맛있는 ( ) 값도 싸요.', ['반면에','데다가','대로','채로'], 1],
   ['주말에 ( ) 하루 종일 일만 했어요.', ['쉬는 데다가','쉬는 대로','쉬기는커녕','쉬는 반면에'], 2],
+  // 15–21: har toifaning 3-savoli (① ~ ⑦ tartibida)
+  ['약속에 ( ) 택시를 탔어요.', ['늦느라고','늦는 탓에','늦을까 봐','늦더라도'], 2],
+  ['매일 ( ) 한국어 실력이 늘어요.', ['연습하더라도','연습해야','연습하거든','연습하느라고'], 1],
+  ['하늘이 많이 흐리네요. 오후에 비가 ( ).', ['올 리가 없어요','왔나 봐요','올까 봐요','올지도 몰라요'], 3],
+  ['매일 한국 드라마를 ( ) 듣기 실력이 좋아졌어요.', ['보다 보니','보는 대로','본 채로','보자마자'], 0],
+  ['눈물이 ( ) 많이 웃었어요.', ['나는 반면에','날 정도로','날수록','나는 데다가'], 1],
+  ['학교에 ( ) 길에서 친구를 만났어요.', ['가자마자','갔더니','가다가','가는 김에'], 2],
+  ['지금 밖에 비가 ( ) 우산 있어요?', ['오는 데다가','오는 반면에','오기는커녕','오는데'], 3],
 ];
+const TEST_CAT = ['이유·원인','이유·원인','조건·가정','조건·가정','추측·양태','추측·양태','상태·배경','상태·배경','정도·비교','정도·비교','시간·순서','시간·순서','나열·대조','나열·대조',
+  '이유·원인','조건·가정','추측·양태','상태·배경','정도·비교','시간·순서','나열·대조'];
 
 /* Ⅲ. 어려움 평가 — [항목, 예문] */
 const CATS = [
@@ -235,15 +248,24 @@ BASIC.forEach(([name,ko,uz,type,opts,req])=>{
   basic.appendChild(q);
 });
 
-// Ⅱ
+// Ⅱ — har bir savoldan keyin ishonch darajasi (모르겠어요 tanlansa so'ralmaydi)
 const test = document.getElementById('test');
 TEST.forEach(([stem,opts],i)=>{
   const n='t'+(i+1);
   const q=document.createElement('div'); q.className='q'; q.dataset.req=n;
   q.innerHTML='<div class="stem">'+(i+1)+'. '+esc(stem)+'</div><div class="opts">'+
     opts.map((o,j)=>'<label><input type="radio" name="'+n+'" value="'+L[j]+'">'+L[j]+'. '+esc(o)+'</label>').join('')+
-    '<label><input type="radio" name="'+n+'" value="?"><span class="uz">모르겠어요 / Bilmayman</span></label></div>';
+    '<label><input type="radio" name="'+n+'" value="?"><span class="uz">모르겠어요 / Bilmayman</span></label></div>'+
+    '<div class="conf" data-req="c'+(i+1)+'" data-for="'+n+'" hidden><span class="note">이 답은 / Bu javob:</span><div class="opts inline">'+
+    '<label><input type="radio" name="c'+(i+1)+'" value="1">확실해요 / Ishonchim komil</label>'+
+    '<label><input type="radio" name="c'+(i+1)+'" value="0">짐작했어요 / Taxmin qildim</label></div></div>';
   test.appendChild(q);
+});
+test.addEventListener('change',e=>{
+  const m=/^t(\d+)$/.exec(e.target.name); if(!m) return;
+  const c=test.querySelector('[data-for="t'+m[1]+'"]');
+  const skip=e.target.value==='?'; c.hidden=skip;
+  if(skip) c.querySelectorAll('input').forEach(i=>i.checked=false);
 });
 
 // Ⅲ
@@ -281,7 +303,7 @@ pc.addEventListener('change',e=>{
 });
 
 // progress
-const reqEls=()=>[...document.querySelectorAll('[data-req]')];
+const reqEls=()=>[...document.querySelectorAll('[data-req]')].filter(el=>!el.hidden);
 function answered(name){ return [...document.getElementsByName(name)].some(i=>i.checked); }
 function updateProgress(){
   const r=reqEls(); const done=r.filter(el=>answered(el.dataset.req)).length;
@@ -308,11 +330,16 @@ document.getElementById('f').addEventListener('submit', async (e)=>{
   for(const [k,v] of fd.entries()){ if(!(k in data)) data[k]=v; }
   ['혼동쌍','어려운이유','학습환경'].forEach(k=>{ data[k]=fd.getAll(k).join(', '); });
   // test scoring
-  let score=0; const raw=[];
-  TEST.forEach((t,i)=>{ const v=data['t'+(i+1)]; delete data['t'+(i+1)];
+  let score=0, sure=0; const raw=[], conf=[];
+  TEST.forEach((t,i)=>{ const k=String(i+1).padStart(2,'0');
+    const v=data['t'+(i+1)]; delete data['t'+(i+1)];
+    const c=data['c'+(i+1)]; delete data['c'+(i+1)];
     const ok = v===L[t[2]] ? 1 : 0; score+=ok;
-    data['시험_'+String(i+1).padStart(2,'0')]=ok; raw.push((i+1)+':'+v); });
+    data['시험_'+k]=ok; raw.push((i+1)+':'+v);
+    if(c!==undefined){ data['확신_'+k]=Number(c); sure+=Number(c); }
+    conf.push((i+1)+':'+(c===undefined?'-':c)); });
   data['시험점수']=score; data['시험응답']=raw.join(' ');
+  data['확신수']=sure; data['확신응답']=conf.join(' ');
   data['주의확인']= data['__attn']==='2' ? 1 : 0; delete data['__attn'];
   data['소요시간초']=Math.round((Date.now()-T0)/1000);
   try{
